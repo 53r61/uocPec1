@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+usuarios=$(awk -F: '{if ($3==0 || $3>500) print $1}' /etc/passwd)
+echo "$usuarios"
+
+
+opcion=$( zenity --list --column "elige una opcion" "1.Letra" "2.Numero")
+
+function letra {
+	local letra=$( zenity --entry --text "introduce una letra")
+	if [ $letra = l ]; then
+		echo "has elegedo la letra l"
+	fi
+}
+function numero {
+	local  numero=$( zenity --entry --text "introduce un numero")
+	if [ $numero = 1 ]; then
+		echo "has introducido un numero"
+	fi
+}
+
+if [ $opcion = 1.Letra ]; then
+	letra
+fi
+
+if  [ $opcion = 2.Numero ]; then
+	numero
+fi

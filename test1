@@ -1,0 +1,3 @@
+#!/bin/bash
+tt=('cat "lista"')
+echo $tt
