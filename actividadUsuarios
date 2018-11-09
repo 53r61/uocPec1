@@ -1,0 +1,3 @@
+#!bin/bash
+VAR= echo 'data +%T'
+ps aux >/root/informes/$VAR; /root/informes/$VAR; 

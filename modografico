@@ -1,29 +1,45 @@
 #!/bin/bash
 
+#filtramos en el archivo passwd que es donde se guardan los usuarios, lo hacemos con la columna 3 ya que ahí es donde estan el nombre de los usuarios, ponemos 3==0 para el root y 3==500 para el resto, ya que es apartir de UDI 500 dondo los identificamos 
+#guardamos todo en nuestra variable usarios
 
 usuarios=$(awk -F: '{if ($3==0 || $3>500) print $1}' /etc/passwd)
-echo "$usuarios"
+#recorro la variable con un for y voy creando los archivos con los nombres de los usuarios a la vez que creo la ruta y meto la informacion del usu que le han dado al sistema
+for i in ${usuarios}
+do
+        mkdir -p /root/informes/
+        ps -u $i >> /root/informes/$i
 
+done
 
-opcion=$( zenity --list --column "elige una opcion" "1.Letra" "2.Numero")
+#interactuamos con el usuairo
+opcion=$( zenity --list --column "elige una opcion" "1.-a" "2.-e" "3.-uu usuario")
 
-function letra {
-	local letra=$( zenity --entry --text "introduce una letra")
-	if [ $letra = l ]; then
-		echo "has elegedo la letra l"
+function a {
+	local a=$( zenity --entry --text "-a")
+	if [ $a = "-a" ]; then
+		echo "presenta el listado"
+		
+		for i in ${usuarios}
+	do
+        	
+        	cat /root/informes/$i
+
+	done
+
 	fi
 }
-function numero {
-	local  numero=$( zenity --entry --text "introduce un numero")
-	if [ $numero = 1 ]; then
-		echo "has introducido un numero"
+function informar {
+	local informar=$( zenity --entry --text "introduce -e para informar sobre las conexiones")
+	if [ $informar = "-e" ]; then
+		echo "informar sobre conexiones"
 	fi
 }
 
-if [ $opcion = 1.Letra ]; then
-	letra
+if [ $opcion = 1.-a ]; then
+	a
 fi
 
-if  [ $opcion = 2.Numero ]; then
-	numero
+if  [ $opcion = 2.-e ]; then
+	informar
 fi
