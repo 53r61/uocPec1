@@ -1,3 +1,4 @@
 #!/bin/bash
 tt=('cat "lista"')
 echo $tt
+echo HIJOS DEL MAL
